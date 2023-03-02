@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int account = 0;
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(234);
+            queue.Enqueue(3454);
+            queue.Enqueue(15);
+            queue.Enqueue(542);
+            queue.Enqueue(5865);
+            queue.Enqueue(42586);
+            queue.Enqueue(10);
+
+            foreach (var person in queue)
+            {
+                Console.Clear();
+                Console.WriteLine("Сумма покупки + " + person);
+                account += person;
+                Console.WriteLine("на вашем балансе: " + account);
+                Console.WriteLine("Для обслуживания следующего клиента нажмите любую кнопку");
+                Console.ReadKey();
+            }
+
+            Console.WriteLine("Очередь пуста");
+        }
+    }
+}
