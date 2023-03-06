@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,29 +11,41 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
+            int peopleInQueue = 7;
+            Random random = new Random();
             int account = 0;
             Queue<int> queue = new Queue<int>();
-            queue.Enqueue(234);
-            queue.Enqueue(3454);
-            queue.Enqueue(15);
-            queue.Enqueue(542);
-            queue.Enqueue(5865);
-            queue.Enqueue(42586);
-            queue.Enqueue(10);
+
+            CompleteQueue(ref random, ref queue, ref peopleInQueue);
 
             while (queue.Count != 0)
             {
                 Console.Clear();
                 Console.WriteLine("Сумма корзины покупателя " + queue.Peek());
-                account += queue.Peek();
-                queue.Dequeue();
+
+                CountMoney(ref account, ref queue);
+
                 Console.WriteLine("на вашем балансе: " + account);
                 Console.WriteLine("Для обслуживания следующего клиента нажмите любую кнопку");
                 Console.ReadKey();
             }
 
             Console.Clear();
-            Console.WriteLine("Очередь пуста");
+            Console.WriteLine("Очередь пуста, на вашем балансе " + account + " рублей");
+        }
+
+        static void CountMoney(ref int account, ref Queue<int> queue)
+        {
+            account += queue.Peek();
+            queue.Dequeue();
+        }
+
+        static void CompleteQueue(ref Random random, ref Queue<int> queue, ref int peopleInQueue)
+        {
+            for (int i = 0; i < peopleInQueue; i++)
+            {
+                queue.Enqueue(random.Next(15, 5000));
+            }
         }
     }
 }
