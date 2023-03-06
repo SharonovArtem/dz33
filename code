@@ -20,16 +20,18 @@ namespace ConsoleApp5
             queue.Enqueue(42586);
             queue.Enqueue(10);
 
-            foreach (var person in queue)
+            while (queue.Count != 0)
             {
                 Console.Clear();
-                Console.WriteLine("Сумма покупки + " + person);
-                account += person;
+                Console.WriteLine("Сумма корзины покупателя " + queue.Peek());
+                account += queue.Peek();
+                queue.Dequeue();
                 Console.WriteLine("на вашем балансе: " + account);
                 Console.WriteLine("Для обслуживания следующего клиента нажмите любую кнопку");
                 Console.ReadKey();
             }
 
+            Console.Clear();
             Console.WriteLine("Очередь пуста");
         }
     }
