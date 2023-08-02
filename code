@@ -11,40 +11,43 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            int peopleInQueue = 7;
-            Random random = new Random();
             int account = 0;
             Queue<int> queue = new Queue<int>();
 
-            CompleteQueue(ref random, ref queue, ref peopleInQueue);
+            CompleteArray(queue);
 
             while (queue.Count != 0)
             {
-                Console.Clear();
-                Console.WriteLine("Сумма корзины покупателя " + queue.Peek());
-
-                CountMoney(ref account, ref queue);
-
-                Console.WriteLine("на вашем балансе: " + account);
-                Console.WriteLine("Для обслуживания следующего клиента нажмите любую кнопку");
-                Console.ReadKey();
+                CountMoney(ref account, queue);
             }
 
             Console.Clear();
             Console.WriteLine("Очередь пуста, на вашем балансе " + account + " рублей");
         }
 
-        static void CountMoney(ref int account, ref Queue<int> queue)
+        static void CountMoney(ref int account, Queue<int> queue)
         {
+            Console.Clear();
+            Console.WriteLine("Сумма корзины покупателя " + queue.Peek());
+
             account += queue.Peek();
             queue.Dequeue();
+
+            Console.WriteLine("на вашем балансе: " + account);
+            Console.WriteLine("Для обслуживания следующего клиента нажмите любую кнопку");
+            Console.ReadKey();
         }
 
-        static void CompleteQueue(ref Random random, ref Queue<int> queue, ref int peopleInQueue)
+        static void CompleteArray(Queue<int> queue)
         {
+            int peopleInQueue = 7;
+            Random random = new Random();
+            int minimalCheck = 15;
+            int maximalCheck = 5000;
+
             for (int i = 0; i < peopleInQueue; i++)
             {
-                queue.Enqueue(random.Next(15, 5000));
+                queue.Enqueue(random.Next(minimalCheck, maximalCheck));
             }
         }
     }
